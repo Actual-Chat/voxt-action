@@ -9,14 +9,14 @@ inputs:
   api-key:
     description: >-
       Voxt API key (Voxt → Settings → API keys). Store it as a repository
-      secret and pass it as ${{ secrets.VOXT_API_KEY }}.
+      secret and pass it as `secrets.VOXT_API_KEY`.
     required: true
   chat-id:
     description: The id of the Voxt chat to post to.
     required: true
   status:
     description: >-
-      Job status — success | failure | cancelled. Pass ${{ job.status }} to
+      Job status — success | failure | cancelled. Pass `job.status` to
       enable the automatic status message. At least one of `status` /
       `message` is required.
     required: false
