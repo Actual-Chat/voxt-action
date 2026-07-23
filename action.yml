@@ -1,0 +1,54 @@
+name: Voxt Notify
+description: Post build/test notifications to a Voxt chat (actual.chat)
+author: Actual Chat
+branding:
+  icon: message-circle
+  color: purple
+
+inputs:
+  api-key:
+    description: >-
+      Voxt API key (Voxt → Settings → API keys). Store it as a repository
+      secret and pass it as ${{ secrets.VOXT_API_KEY }}.
+    required: true
+  chat-id:
+    description: The id of the Voxt chat to post to.
+    required: true
+  status:
+    description: >-
+      Job status — success | failure | cancelled. Pass ${{ job.status }} to
+      enable the automatic status message. At least one of `status` /
+      `message` is required.
+    required: false
+  message:
+    description: >-
+      Custom message text (supports Voxt markup: **bold**, *italic*, code
+      blocks, links). If `status` is also set, this is appended to the
+      automatic status message.
+    required: false
+  title:
+    description: Overrides the automatically generated message title.
+    required: false
+  message-id:
+    description: >-
+      Id of a previously posted message (the `message-id` output of an earlier
+      step). When set, that message is edited instead of posting a new one.
+    required: false
+  base-url:
+    description: Base URL of the Voxt server.
+    required: false
+    default: https://actual.chat
+  fail-on-error:
+    description: Whether a notification failure fails the job step.
+    required: false
+    default: 'true'
+
+outputs:
+  message-id:
+    description: >-
+      Id of the posted (or edited) message. Pass it back via the `message-id`
+      input in a later step to update the same message.
+
+runs:
+  using: node24
+  main: dist/index.js

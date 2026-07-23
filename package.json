@@ -1,0 +1,25 @@
+{
+  "name": "voxt-action",
+  "version": "1.0.0",
+  "description": "GitHub Action that posts build/test notifications to a Voxt chat",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=esm --outfile=dist/index.js --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\"",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "all": "npm run typecheck && npm run test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Actual-Chat/voxt-action.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@actions/github": "^6.0.1",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}

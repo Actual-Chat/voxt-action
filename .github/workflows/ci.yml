@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Check dist/ is up to date
+        run: |
+          if ! git diff --exit-code dist/; then
+            echo '::error::dist/ is out of date. Run `npm run build` and commit the result.'
+            exit 1
+          fi
+
+  # Dogfooding: this action notifies about its own CI runs, exercising the
+  # real endpoint (post + edit). Runs only when the VOXT_API_KEY secret is
+  # available (i.e. not on PRs from forks).
+  self-test:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    env:
+      HAS_KEY: ${{ secrets.VOXT_API_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Post "in progress" message
+        id: start
+        if: env.HAS_KEY == 'true'
+        uses: ./
+        with:
+          api-key: ${{ secrets.VOXT_API_KEY }}
+          chat-id: ${{ vars.VOXT_TEST_CHAT_ID }}
+          title: 'voxt-action self-test running…'
+          status: running
+
+      - name: Edit it to the final status
+        if: env.HAS_KEY == 'true'
+        uses: ./
+        with:
+          api-key: ${{ secrets.VOXT_API_KEY }}
+          chat-id: ${{ vars.VOXT_TEST_CHAT_ID }}
+          message-id: ${{ steps.start.outputs.message-id }}
+          status: ${{ job.status }}
+          message: 'self-test: post + edit both worked'
