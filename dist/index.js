@@ -199,7 +199,7 @@ var VoxtClient = class {
   maxAttempts;
   backoffMs;
   constructor(options) {
-    this.endpoint = options.baseUrl.replace(/\/+$/, "") + "/api/mcp";
+    this.endpoint = options.baseUrl.replace(/\/+$/, "") + "/mcp";
     this.apiKey = options.apiKey;
     this.timeoutMs = options.timeoutMs ?? 15e3;
     this.maxAttempts = options.maxAttempts ?? 3;

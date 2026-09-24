@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { VoxtClient, parseRpcResponse } from '../src/mcp-client.js';
 
-const ENDPOINT = 'https://voxt.test/api/mcp';
+const ENDPOINT = 'https://voxt.test/mcp';
 
 function sseBody(payload: object): string {
   return `event: message\ndata: ${JSON.stringify(payload)}\n\n`;

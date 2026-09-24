@@ -50,7 +50,7 @@ export class VoxtClient {
   private readonly backoffMs: number;
 
   constructor(options: VoxtClientOptions) {
-    this.endpoint = options.baseUrl.replace(/\/+$/, '') + '/api/mcp';
+    this.endpoint = options.baseUrl.replace(/\/+$/, '') + '/mcp';
     this.apiKey = options.apiKey;
     this.timeoutMs = options.timeoutMs ?? 15_000;
     this.maxAttempts = options.maxAttempts ?? 3;
