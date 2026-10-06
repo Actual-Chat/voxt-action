@@ -1,5 +1,5 @@
 name: Voxt Notify
-description: Post build/test notifications to a Voxt chat (actual.chat)
+description: Post build/test notifications to a Voxt chat (voxt.ai)
 author: Actual Chat
 branding:
   icon: message-circle
@@ -37,7 +37,7 @@ inputs:
   base-url:
     description: Base URL of the Voxt server.
     required: false
-    default: https://actual.chat
+    default: https://voxt.ai
   fail-on-error:
     description: Whether a notification failure fails the job step.
     required: false

@@ -337,7 +337,7 @@ async function run() {
   const message = getInput("message") || void 0;
   const title = getInput("title") || void 0;
   const messageIdInput = getInput("message-id") || void 0;
-  const baseUrl = getInput("base-url") || "https://actual.chat";
+  const baseUrl = getInput("base-url") || "https://voxt.ai";
   const failOnError = getBooleanInput("fail-on-error");
   try {
     if (!status && !message)

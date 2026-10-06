@@ -1,6 +1,6 @@
 # voxt-action
 
-Post build/test notifications from GitHub Actions to a [Voxt](https://actual.chat) chat.
+Post build/test notifications from GitHub Actions to a [Voxt](https://voxt.ai) chat.
 
 ```yaml
 - uses: Actual-Chat/voxt-action@v1
@@ -56,7 +56,7 @@ custom text is appended to the status block). Voxt markup is supported:
     chat-id: dpwo1cnb1k
     message: |
       **Deployed** `${{ github.sha }}` to production 🚀
-      https://actual.chat
+      https://voxt.ai
 ```
 
 ### Post at start, update with the result
@@ -95,7 +95,7 @@ in place:
 | `message` | one of these | — | Custom text (Voxt markup); appended if `status` is also set |
 | `title` | no | auto | Overrides the generated title |
 | `message-id` | no | — | Id of an earlier message to edit instead of posting |
-| `base-url` | no | `https://actual.chat` | Voxt server base URL |
+| `base-url` | no | `https://voxt.ai` | Voxt server base URL |
 | `fail-on-error` | no | `true` | Whether a notification failure fails the step |
 
 ## Outputs
