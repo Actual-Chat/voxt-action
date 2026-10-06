@@ -14,7 +14,7 @@ export async function run(): Promise<void> {
   const message = core.getInput('message') || undefined;
   const title = core.getInput('title') || undefined;
   const messageIdInput = core.getInput('message-id') || undefined;
-  const baseUrl = core.getInput('base-url') || 'https://actual.chat';
+  const baseUrl = core.getInput('base-url') || 'https://voxt.ai';
   const failOnError = core.getBooleanInput('fail-on-error');
 
   try {
